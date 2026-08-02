@@ -66,12 +66,12 @@ export function ProjectCard({
       <div className="flex flex-1 flex-col gap-2 p-4">
         {eyebrow ? <div className="flex items-center gap-1">{eyebrow}</div> : null}
 
-        <h3 className="font-display text-xl font-semibold leading-snug tracking-snug text-content-primary">
+        <h3 className="font-display tracking-snug text-content-primary text-xl leading-snug font-semibold">
           <Link
             href={href}
             // The overlay. `z-raised` keeps it above the card's own background
             // without escaping the card's stacking context.
-            className="after:absolute after:inset-0 after:z-raised after:content-['']"
+            className="after:z-raised after:absolute after:inset-0 after:content-['']"
           >
             {title}
           </Link>

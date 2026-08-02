@@ -52,11 +52,7 @@ export function ScrollProgress({ className }: ScrollProgressProps) {
         scaleX: prefersReducedMotion ? scrollYProgress : smoothed,
         transformOrigin: 'left',
       }}
-      className={cn(
-        'fixed inset-x-0 top-0 z-header h-px bg-accent',
-        'gpu',
-        className,
-      )}
+      className={cn('z-header bg-accent fixed inset-x-0 top-0 h-px', 'gpu', className)}
     />
   )
 }

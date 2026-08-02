@@ -29,9 +29,7 @@ export default function NotFound() {
           Page not found
         </Heading>
 
-        <Text measure="sm">
-          This page doesn&apos;t exist or has moved.
-        </Text>
+        <Text measure="sm">This page doesn&apos;t exist or has moved.</Text>
 
         <Button asChild variant="outline" className="mt-2">
           <Link href={routes.home}>Back to home</Link>

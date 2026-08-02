@@ -61,7 +61,7 @@ export function ExperienceCard({
       {summary ? <Text measure="md">{summary}</Text> : null}
 
       {highlights && highlights.length > 0 ? (
-        <ul className="flex flex-col gap-0-5">
+        <ul className="gap-0-5 flex flex-col">
           {highlights.map((highlight) => (
             <li key={highlight}>
               <Text variant="sm" measure="md">

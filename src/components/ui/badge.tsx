@@ -30,10 +30,8 @@ const badgeVariants = cva(
         outline: 'bg-transparent border-border-strong text-content-secondary',
         solid: 'bg-primary border-transparent text-primary-foreground',
         accent: 'bg-accent-subtle border-transparent text-content-accent',
-        success:
-          'bg-success-surface border-success-border text-success-foreground',
-        warning:
-          'bg-warning-surface border-warning-border text-warning-foreground',
+        success: 'bg-success-surface border-success-border text-success-foreground',
+        warning: 'bg-warning-surface border-warning-border text-warning-foreground',
         danger: 'bg-danger-surface border-danger-border text-danger-foreground',
       },
       size: {

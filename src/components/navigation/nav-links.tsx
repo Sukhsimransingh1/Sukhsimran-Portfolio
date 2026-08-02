@@ -37,7 +37,7 @@ export function NavLinks({ className }: { className?: string }) {
               current={isActive}
               className={cn(
                 'font-sans text-sm font-medium',
-                'transition-colors duration-fast ease-out',
+                'duration-fast transition-colors ease-out',
                 isActive
                   ? 'text-content-primary'
                   : 'text-content-tertiary hover:text-content-primary',

@@ -36,8 +36,8 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-header w-full',
-        'border-b border-border',
+        'z-header sticky top-0 w-full',
+        'border-border border-b',
         // `color-mix` with a fallback: the header reads as part of the page
         // rather than a floating bar, without `backdrop-filter`'s cost.
         'bg-background',
@@ -47,7 +47,7 @@ export function Navbar() {
         <div className="flex h-[var(--header-height)] items-center justify-between gap-3">
           <Link
             href={routes.home}
-            className="font-display text-base font-semibold tracking-tight text-content-primary"
+            className="font-display text-content-primary text-base font-semibold tracking-tight"
           >
             {siteConfig.name}
           </Link>

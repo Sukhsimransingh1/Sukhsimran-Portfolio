@@ -3,7 +3,9 @@ import { Providers } from '@/components/providers'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { SkipLink } from '@/components/navigation/skip-link'
+import { JsonLd } from '@/components/seo/json-ld'
 import { fontVariables } from '@/lib/fonts'
+import { personJsonLd, websiteJsonLd } from '@/lib/json-ld'
 import { siteConfig } from '@/config/site'
 import '@/styles/globals.css'
 
@@ -41,7 +43,10 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: [{ url: '/favicon.ico', sizes: 'any' }, { url: '/icon.svg', type: 'image/svg+xml' }],
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
     apple: '/apple-icon.png',
   },
 
@@ -84,6 +89,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // suppresses the warning for <html> only, not for the tree.
     <html lang={siteConfig.lang} className={fontVariables} suppressHydrationWarning>
       <body>
+        {/* Site-level structured data. Emitted once here rather than per page —
+            the Person and WebSite nodes are the same everywhere, and pages
+            reference them by `@id`. */}
+        <JsonLd data={personJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
+
         <Providers>
           {/* First focusable element in the DOM — see WCAG 2.4.1. */}
           <SkipLink />

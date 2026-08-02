@@ -22,10 +22,10 @@ export function SkipLink({ href = '#main' }: { href?: string }) {
       href={href}
       className={cn(
         'sr-only-focusable',
-        'focus:fixed focus:top-2 focus:left-2 focus:z-max',
-        'focus:rounded-md focus:border focus:border-border-strong',
+        'focus:z-max focus:fixed focus:top-2 focus:left-2',
+        'focus:border-border-strong focus:rounded-md focus:border',
         'focus:bg-surface focus:px-3 focus:py-2',
-        'focus:font-sans focus:text-sm focus:font-medium focus:text-content-primary',
+        'focus:text-content-primary focus:font-sans focus:text-sm focus:font-medium',
         'focus:shadow-lg',
       )}
     >

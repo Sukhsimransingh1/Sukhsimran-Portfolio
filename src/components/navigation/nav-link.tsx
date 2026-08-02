@@ -38,12 +38,7 @@ export function NavLink({ item, className, current, children }: NavLinkProps) {
 
   if (item.external) {
     return (
-      <a
-        href={item.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={className}
-      >
+      <a href={item.href} target="_blank" rel="noopener noreferrer" className={className}>
         {label}
       </a>
     )

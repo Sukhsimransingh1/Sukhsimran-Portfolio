@@ -1,2 +1,5 @@
 export { SkipLink } from './skip-link'
 export { NavLinks } from './nav-links'
+export { NavLink, type NavLinkProps } from './nav-link'
+export { Breadcrumb, type BreadcrumbItem, type BreadcrumbProps } from './breadcrumb'
+export { ScrollProgress, type ScrollProgressProps } from './scroll-progress'

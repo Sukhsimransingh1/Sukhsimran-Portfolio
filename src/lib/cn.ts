@@ -69,29 +69,15 @@ const twMerge = extendTailwindMerge({
           ],
         },
       ],
-      rounded: [
-        { rounded: ['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', 'full'] },
-      ],
+      rounded: [{ rounded: ['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', 'full'] }],
       shadow: [{ shadow: ['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] }],
-      leading: [
-        { leading: ['none', 'tight', 'snug', 'normal', 'relaxed', 'loose'] },
-      ],
+      leading: [{ leading: ['none', 'tight', 'snug', 'normal', 'relaxed', 'loose'] }],
       tracking: [
         {
-          tracking: [
-            'tighter',
-            'tight',
-            'snug',
-            'normal',
-            'wide',
-            'wider',
-            'widest',
-          ],
+          tracking: ['tighter', 'tight', 'snug', 'normal', 'wide', 'wider', 'widest'],
         },
       ],
-      'font-weight': [
-        { font: ['light', 'regular', 'medium', 'semibold', 'bold'] },
-      ],
+      'font-weight': [{ font: ['light', 'regular', 'medium', 'semibold', 'bold'] }],
       'font-family': [{ font: ['sans', 'display', 'mono'] }],
     },
   },

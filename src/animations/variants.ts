@@ -142,10 +142,7 @@ export const staggerContainer: Variants = {
 }
 
 /** Builds a stagger container with an explicit rhythm. */
-export function createStagger(
-  gap: number = stagger.base,
-  delay = 0.05,
-): Variants {
+export function createStagger(gap: number = stagger.base, delay = 0.05): Variants {
   return {
     hidden: {},
     visible: {

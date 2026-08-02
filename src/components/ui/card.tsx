@@ -91,10 +91,7 @@ export function Card({
 }: CardProps) {
   return (
     <Tag
-      className={cn(
-        cardVariants({ variant, padding, radius, interactive }),
-        className,
-      )}
+      className={cn(cardVariants({ variant, padding, radius, interactive }), className)}
     >
       {children}
     </Tag>
@@ -135,9 +132,7 @@ export function CardFooter({
   children: ReactNode
   className?: string
 }) {
-  return (
-    <div className={cn('flex items-center gap-2', className)}>{children}</div>
-  )
+  return <div className={cn('flex items-center gap-2', className)}>{children}</div>
 }
 
 Card.Header = CardHeader

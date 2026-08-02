@@ -27,8 +27,14 @@
 /**
  * Tell Tailwind where to scan for class names. Required in v4 when sources live
  * outside the stylesheet's own directory.
+ *
+ * Every directory under `src/` that can contain a literal class name must be
+ * listed. A missing entry fails silently — the class is simply never generated,
+ * and the element renders unstyled with no build error.
  */
+@source '../animations/**/*.{ts,tsx}';
 @source '../app/**/*.{ts,tsx}';
 @source '../components/**/*.{ts,tsx}';
 @source '../content/**/*.{ts,tsx,md,mdx}';
+@source '../hooks/**/*.{ts,tsx}';
 @source '../lib/**/*.{ts,tsx}';

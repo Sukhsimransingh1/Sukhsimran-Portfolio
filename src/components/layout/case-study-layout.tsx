@@ -79,7 +79,7 @@ function DecisionList({ decisions }: { decisions: readonly EngineeringDecision[]
             <Text measure="md">{decision.rationale}</Text>
 
             {decision.alternatives && decision.alternatives.length > 0 ? (
-              <div className="flex flex-col gap-0-5">
+              <div className="gap-0-5 flex flex-col">
                 <Text as="span" variant="overline" color="tertiary">
                   Alternatives considered
                 </Text>
@@ -115,7 +115,9 @@ function ChallengeList({ challenges }: { challenges: readonly Challenge[] }) {
               {challenge.title}
             </Heading>
             <Text measure="md">{challenge.description}</Text>
-            {challenge.resolution ? <Text measure="md">{challenge.resolution}</Text> : null}
+            {challenge.resolution ? (
+              <Text measure="md">{challenge.resolution}</Text>
+            ) : null}
           </li>
         ))}
       </ul>
@@ -138,13 +140,13 @@ function ImpactList({ impact }: { impact: readonly ImpactMetric[] }) {
 
       <dl className="flex flex-wrap gap-4">
         {impact.map((metric) => (
-          <div key={metric.label} className="flex flex-col gap-0-5">
+          <div key={metric.label} className="gap-0-5 flex flex-col">
             <dt>
               <Text as="span" variant="overline" color="tertiary">
                 {metric.label}
               </Text>
             </dt>
-            <dd className="flex flex-col gap-0-5">
+            <dd className="gap-0-5 flex flex-col">
               <Text as="span" variant="lg" color="primary" weight="semibold">
                 {metric.value}
               </Text>

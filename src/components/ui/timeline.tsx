@@ -41,7 +41,7 @@ export function TimelineItem({ children, className, isLast = false }: TimelineIt
         // The rail: a 1px vertical border on the marker column, drawn by the
         // item itself so it stops cleanly at the last entry.
         !isLast &&
-          'before:absolute before:top-3 before:bottom-0 before:left-[3px] before:w-px before:bg-border',
+          'before:bg-border before:absolute before:top-3 before:bottom-0 before:left-[3px] before:w-px',
         className,
       )}
     >
@@ -60,8 +60,8 @@ export function TimelineMarker({ className }: { className?: string }) {
     <span
       aria-hidden="true"
       className={cn(
-        'relative z-raised mt-1 size-1 shrink-0 rounded-full',
-        'bg-border-strong ring-4 ring-background',
+        'z-raised relative mt-1 size-1 shrink-0 rounded-full',
+        'bg-border-strong ring-background ring-4',
         className,
       )}
     />

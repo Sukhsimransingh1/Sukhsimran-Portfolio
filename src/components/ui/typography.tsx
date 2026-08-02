@@ -68,8 +68,7 @@ const headingVariants = cva('text-balance', {
   },
 })
 
-export interface HeadingProps
-  extends VariantProps<typeof headingVariants> {
+export interface HeadingProps extends VariantProps<typeof headingVariants> {
   children: ReactNode
   className?: string
   /**
@@ -216,8 +215,8 @@ export function Code({ children, className }: CodeProps) {
   return (
     <code
       className={cn(
-        'rounded-sm border border-code-border bg-code-background px-0-5 py-px',
-        'font-mono text-sm text-code-foreground',
+        'border-code-border bg-code-background px-0-5 rounded-sm border py-px',
+        'text-code-foreground font-mono text-sm',
         className,
       )}
     >

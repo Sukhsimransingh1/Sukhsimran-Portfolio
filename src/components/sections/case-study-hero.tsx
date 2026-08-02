@@ -46,7 +46,7 @@ export function CaseStudyHero({ project, className, id }: CaseStudyHeroProps) {
       {role || year ? (
         <dl className="flex flex-wrap gap-4">
           {role ? (
-            <div className="flex flex-col gap-0-5">
+            <div className="gap-0-5 flex flex-col">
               <dt>
                 <Text as="span" variant="overline" color="tertiary">
                   Role
@@ -61,7 +61,7 @@ export function CaseStudyHero({ project, className, id }: CaseStudyHeroProps) {
           ) : null}
 
           {year ? (
-            <div className="flex flex-col gap-0-5">
+            <div className="gap-0-5 flex flex-col">
               <dt>
                 <Text as="span" variant="overline" color="tertiary">
                   Year

@@ -37,7 +37,9 @@ export function CTA({ title, description, actions, className, id }: CTAProps) {
         </Text>
       ) : null}
 
-      {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
+      {actions ? (
+        <div className="flex flex-wrap items-center gap-2">{actions}</div>
+      ) : null}
     </div>
   )
 }

@@ -47,7 +47,9 @@ export const projects = [
 export type ProjectSlug = (typeof projects)[number]['slug']
 
 /** Every slug, in registry order. Drives static params and the sitemap. */
-export const projectSlugs: readonly ProjectSlug[] = projects.map((project) => project.slug)
+export const projectSlugs: readonly ProjectSlug[] = projects.map(
+  (project) => project.slug,
+)
 
 /**
  * Projects in display order.

@@ -56,8 +56,17 @@ export interface GridProps extends VariantProps<typeof gridVariants> {
   as?: ElementType
 }
 
-export function Grid({ children, className, cols, gap, align, as: Tag = 'div' }: GridProps) {
-  return <Tag className={cn(gridVariants({ cols, gap, align }), className)}>{children}</Tag>
+export function Grid({
+  children,
+  className,
+  cols,
+  gap,
+  align,
+  as: Tag = 'div',
+}: GridProps) {
+  return (
+    <Tag className={cn(gridVariants({ cols, gap, align }), className)}>{children}</Tag>
+  )
 }
 
 /* ==========================================================================

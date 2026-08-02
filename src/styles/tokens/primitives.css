@@ -49,11 +49,11 @@
      metric-adjacent to the primary faces to minimise layout shift before swap.
      ========================================================================== */
   --font-sans:
-    var(--font-sans-primary), ui-sans-serif, system-ui, -apple-system,
-    'Segoe UI', sans-serif;
+    var(--font-sans-primary), ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
   --font-display:
-    var(--font-display-primary), var(--font-sans-primary), ui-sans-serif,
-    system-ui, sans-serif;
+    var(--font-display-primary), var(--font-sans-primary), ui-sans-serif, system-ui,
+    sans-serif;
   --font-mono:
     var(--font-mono-primary), ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
@@ -235,8 +235,7 @@
     color var(--duration-fast) var(--ease-out),
     background-color var(--duration-fast) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out),
-    fill var(--duration-fast) var(--ease-out),
-    stroke var(--duration-fast) var(--ease-out);
+    fill var(--duration-fast) var(--ease-out), stroke var(--duration-fast) var(--ease-out);
   --transition-opacity: opacity var(--duration-fast) var(--ease-out);
   --transition-transform: transform var(--duration-base) var(--ease-out);
   --transition-shadow: box-shadow var(--duration-fast) var(--ease-out);

@@ -43,7 +43,9 @@
     -moz-osx-font-smoothing: grayscale;
     /* Contextual alternates + kerning on; ligatures stay off in UI text where
        they can harm glyph-level scanning. */
-    font-feature-settings: 'kern' 1, 'calt' 1;
+    font-feature-settings:
+      'kern' 1,
+      'calt' 1;
     /* Theme flips are animated so the toggle reads as a deliberate transition
        rather than a flash. Property list is explicit — never `all`. */
     transition:
@@ -109,7 +111,9 @@
   samp {
     font-family: var(--font-mono);
     font-size: 0.9em; /* Relative: mono faces run optically large at matched px. */
-    font-feature-settings: 'kern' 0, 'calt' 0; /* Preserve monospace alignment. */
+    font-feature-settings:
+      'kern' 0,
+      'calt' 0; /* Preserve monospace alignment. */
   }
 
   img,

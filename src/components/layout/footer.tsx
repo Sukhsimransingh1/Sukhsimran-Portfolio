@@ -28,7 +28,7 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="mt-auto w-full border-t border-border">
+    <footer className="border-border mt-auto w-full border-t">
       <Container>
         <div className="flex flex-col gap-4 py-8 md:flex-row md:items-center md:justify-between">
           <Text variant="sm" color="muted">
@@ -41,7 +41,7 @@ export function Footer() {
                 <li key={item.href}>
                   <NavLink
                     item={item}
-                    className="font-sans text-sm text-content-tertiary transition-colors duration-fast ease-out hover:text-content-primary"
+                    className="text-content-tertiary duration-fast hover:text-content-primary font-sans text-sm transition-colors ease-out"
                   />
                 </li>
               ))}
