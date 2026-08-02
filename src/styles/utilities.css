@@ -7,6 +7,63 @@
  * concern that would otherwise be re-implemented ad hoc.
  */
 
+/**
+ * Z-INDEX SCALE
+ * ----------------------------------------------------------------------------
+ * `theme.css` resets Tailwind's stock scales, and Tailwind has no `--z-*` theme
+ * namespace to replace them with — so `z-header`, `z-raised` and `z-max`
+ * compiled to nothing at all. Elements that read as stacked in the source were
+ * stacking purely by document order.
+ *
+ * Registered as `@utility` rather than plain classes in `@layer utilities` so
+ * they compose with variants: `after:z-raised` and `focus:z-max` are both live
+ * call sites and neither works with a bare class.
+ *
+ * The whole scale is declared even where a step is currently unused. Defining
+ * only the steps in use is what produced the original defect — the next author
+ * reaches for `z-overlay`, sees it in `primitives.css`, and ships an element
+ * with no z-index.
+ */
+@utility z-behind {
+  z-index: var(--z-behind);
+}
+@utility z-base {
+  z-index: var(--z-base);
+}
+@utility z-raised {
+  z-index: var(--z-raised);
+}
+@utility z-sticky {
+  z-index: var(--z-sticky);
+}
+@utility z-header {
+  z-index: var(--z-header);
+}
+@utility z-dropdown {
+  z-index: var(--z-dropdown);
+}
+@utility z-overlay {
+  z-index: var(--z-overlay);
+}
+@utility z-modal {
+  z-index: var(--z-modal);
+}
+@utility z-popover {
+  z-index: var(--z-popover);
+}
+@utility z-toast {
+  z-index: var(--z-toast);
+}
+@utility z-tooltip {
+  z-index: var(--z-tooltip);
+}
+@utility z-cursor {
+  z-index: var(--z-cursor);
+}
+@utility z-max {
+  z-index: var(--z-max);
+}
+
 @layer utilities {
   /**
    * Visually hidden, still announced by screen readers.

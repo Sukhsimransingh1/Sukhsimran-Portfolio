@@ -26,8 +26,6 @@ import { cn } from '@/lib/cn'
  * CONSTRAINT: no other interactive element may sit inside the card, because the
  * overlay would cover it. Anything that needs its own action requires
  * `position: relative` and a higher stacking context to sit above the overlay.
- *
- * Structural only — content arrives in a later phase.
  */
 
 export interface ProjectCardProps {
@@ -66,7 +64,13 @@ export function ProjectCard({
       <div className="flex flex-1 flex-col gap-2 p-4">
         {eyebrow ? <div className="flex items-center gap-1">{eyebrow}</div> : null}
 
-        <h3 className="font-display tracking-snug text-content-primary text-xl leading-snug font-semibold">
+        <h3
+          className={cn(
+            'font-display tracking-snug text-content-primary text-xl leading-snug font-semibold',
+            'duration-base transition-colors ease-out',
+            'group-hover:text-content-accent',
+          )}
+        >
           <Link
             href={href}
             // The overlay. `z-raised` keeps it above the card's own background

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
-import { Heading, Text } from '@/components/ui/typography'
+import { AnimatedHeading, Reveal } from '@/animations'
+import { Text } from '@/components/ui/typography'
 import { cn } from '@/lib/cn'
 
 /**
@@ -15,7 +16,12 @@ import { cn } from '@/lib/cn'
  *
  * Renders `h1` by default: a page has exactly one, and it is this one.
  *
- * Structural only — type scale and spacing are later-phase decisions.
+ * MOTION
+ * The title uses `AnimatedHeading` with `immediate`, because a page header is
+ * always above the fold — a scroll-triggered reveal here either fires on mount
+ * anyway or leaves the title invisible if the observer resolves late. The
+ * eyebrow and standfirst follow on a short offset so the block reads
+ * top-to-bottom rather than arriving at once.
  */
 
 export interface PageHeaderProps {
@@ -43,22 +49,35 @@ export function PageHeader({
   return (
     <header className={cn('flex flex-col gap-2', className)}>
       {eyebrow ? (
-        <Text variant="overline" color="tertiary">
-          {eyebrow}
-        </Text>
+        <Reveal immediate variant="fade">
+          <Text variant="overline" color="tertiary">
+            {eyebrow}
+          </Text>
+        </Reveal>
       ) : null}
 
-      <Heading as={as} variant="display-md" id={id}>
-        {title}
-      </Heading>
+      <AnimatedHeading
+        immediate
+        as={as}
+        id={id}
+        text={title}
+        delay={0.06}
+        className="font-display text-content-primary text-4xl leading-tight font-semibold tracking-tight text-balance"
+      />
 
       {description ? (
-        <Text variant="lead" measure="md">
-          {description}
-        </Text>
+        <Reveal immediate delay={0.2}>
+          <Text variant="lead" measure="md">
+            {description}
+          </Text>
+        </Reveal>
       ) : null}
 
-      {children}
+      {children ? (
+        <Reveal immediate delay={0.3}>
+          {children}
+        </Reveal>
+      ) : null}
     </header>
   )
 }

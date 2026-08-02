@@ -21,7 +21,7 @@ export {
 
 export { Reveal } from './reveal'
 export { Fade } from './fade'
-export { Stagger } from './stagger'
+export { Stagger, StaggerItem } from './stagger'
 export { AnimatedHeading } from './animated-heading'
 export { AnimatedParagraph } from './animated-paragraph'
 export { Magnetic } from './magnetic'

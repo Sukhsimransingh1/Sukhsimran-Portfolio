@@ -86,8 +86,15 @@ interface StaggerItemProps {
  * Deliberately declares no `initial`/`animate`/`whileInView` of its own — the
  * parent drives state. Setting them here would detach the item from the
  * parent's orchestration and every child would animate at once.
+ *
+ * EXPORTED BY NAME AS WELL AS ON THE NAMESPACE. A Server Component importing
+ * from this client module receives a client *reference*, not the function
+ * object — and a reference carries no static properties, so `Stagger.Item`
+ * resolves to `undefined` and React throws "Element type is invalid" at
+ * prerender. `Stagger.Item` is fine inside another Client Component; server
+ * callers must import `StaggerItem` directly.
  */
-function StaggerItem({
+export function StaggerItem({
   children,
   className,
   variant = 'fadeUp',

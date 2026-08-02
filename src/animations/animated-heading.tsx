@@ -17,6 +17,11 @@ interface AnimatedHeadingProps {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
   delay?: number
   immediate?: boolean
+  /**
+   * Required when a `Section` names itself via `labelledBy` — the association
+   * only resolves if the heading it points at carries a stable id.
+   */
+  id?: string
 }
 
 /**
@@ -50,6 +55,7 @@ export function AnimatedHeading({
   as: Tag = 'h2',
   delay = 0,
   immediate = false,
+  id,
 }: AnimatedHeadingProps) {
   const prefersReducedMotion = useReducedMotion()
   const words = text.split(' ')
@@ -62,6 +68,7 @@ export function AnimatedHeading({
   if (prefersReducedMotion) {
     return (
       <MotionTag
+        id={id}
         className={cn(className)}
         variants={reducedFade}
         initial="hidden"
@@ -73,7 +80,7 @@ export function AnimatedHeading({
   }
 
   return (
-    <Tag className={cn(className)} aria-label={text}>
+    <Tag id={id} className={cn(className)} aria-label={text}>
       <motion.span
         aria-hidden="true"
         variants={{

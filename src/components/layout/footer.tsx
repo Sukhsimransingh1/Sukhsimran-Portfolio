@@ -1,8 +1,13 @@
+import Link from 'next/link'
+
 import { Container } from '@/components/layout/container'
+import { SocialLinks } from '@/components/content/social-links'
 import { NavLink } from '@/components/navigation/nav-link'
 import { Text } from '@/components/ui/typography'
-import { navItems } from '@/config/routes'
+import { navItems, routes } from '@/config/routes'
 import { siteConfig } from '@/config/site'
+import { socialLinks } from '@/content/socials'
+import { cn } from '@/lib/cn'
 
 /**
  * FOOTER
@@ -22,31 +27,64 @@ import { siteConfig } from '@/config/site'
  * redeploys on every content change; it would not be for a long-lived static
  * page.
  *
- * Structural only — the link groups and layout are later-phase decisions.
+ * `mt-auto` pins the footer to the bottom of the flex column in `layout.tsx`,
+ * so a short page still puts it at the viewport floor rather than mid-screen.
  */
 export function Footer() {
   const year = new Date().getFullYear()
+  const owner = siteConfig.author.name || siteConfig.name
 
   return (
     <footer className="border-border mt-auto w-full border-t">
       <Container>
-        <div className="flex flex-col gap-4 py-8 md:flex-row md:items-center md:justify-between">
-          <Text variant="sm" color="muted">
-            © {year} {siteConfig.author.name || siteConfig.name}
-          </Text>
+        <div className="flex flex-col gap-8 py-10 md:py-12">
+          <div className="flex flex-col gap-6 md:flex-row md:justify-between md:gap-8">
+            <div className="flex max-w-[var(--measure-xs)] flex-col gap-1">
+              <Link
+                href={routes.home}
+                className={cn(
+                  'font-display text-content-primary text-base font-semibold tracking-tight',
+                  'hover:text-content-accent duration-fast transition-colors ease-out',
+                  'self-start',
+                )}
+              >
+                {siteConfig.name}
+              </Link>
+              <Text variant="sm" color="tertiary">
+                {siteConfig.description}
+              </Text>
+            </div>
 
-          <nav aria-label="Footer">
-            <ul className="flex flex-wrap items-center gap-3">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <NavLink
-                    item={item}
-                    className="text-content-tertiary duration-fast hover:text-content-primary font-sans text-sm transition-colors ease-out"
-                  />
-                </li>
-              ))}
-            </ul>
-          </nav>
+            <nav aria-label="Footer">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2 md:justify-end">
+                {navItems.map((item) => (
+                  <li key={item.href}>
+                    <NavLink
+                      item={item}
+                      className={cn(
+                        'font-sans text-sm',
+                        'text-content-tertiary hover:text-content-primary',
+                        'duration-fast transition-colors ease-out',
+                      )}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          <div
+            className={cn(
+              'border-border flex flex-col gap-2 border-t pt-6',
+              'sm:flex-row sm:items-center sm:justify-between',
+            )}
+          >
+            <Text variant="sm" color="muted">
+              © {year} {owner}
+            </Text>
+
+            {socialLinks.length > 0 ? <SocialLinks links={socialLinks} /> : null}
+          </div>
         </div>
       </Container>
     </footer>

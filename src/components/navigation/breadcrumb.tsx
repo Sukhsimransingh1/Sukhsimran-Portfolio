@@ -43,18 +43,27 @@ export function Breadcrumb({ items, className }: BreadcrumbProps) {
             <Fragment key={item.label}>
               <li>
                 {item.href && !isLast ? (
-                  <Link href={item.href} className="font-sans text-sm">
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      'text-content-tertiary hover:text-content-primary font-sans text-sm',
+                      'duration-fast transition-colors ease-out',
+                    )}
+                  >
                     {item.label}
                   </Link>
                 ) : (
-                  <span aria-current="page" className="font-sans text-sm">
+                  <span
+                    aria-current="page"
+                    className="text-content-primary font-sans text-sm"
+                  >
                     {item.label}
                   </span>
                 )}
               </li>
 
               {isLast ? null : (
-                <li aria-hidden className="font-sans text-sm">
+                <li aria-hidden className="text-content-muted font-sans text-sm">
                   /
                 </li>
               )}

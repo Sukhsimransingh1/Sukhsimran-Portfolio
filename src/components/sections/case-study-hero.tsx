@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 import { Badge } from '@/components/ui/badge'
 import { Heading, Text } from '@/components/ui/typography'
 import type { Project } from '@/content/types'
@@ -6,18 +8,19 @@ import { cn } from '@/lib/cn'
 /**
  * CASE STUDY HERO
  * ----------------------------------------------------------------------------
- * The opening of a case study: title, standfirst, and the metadata that
- * establishes context before the narrative starts — role, year, stack.
+ * The masthead of a case study: title, standfirst, and the metadata that
+ * establishes context before the narrative starts.
  *
  * WHY IT TAKES A WHOLE `Project` RATHER THAN LOOSE PROPS
  * Every field it renders comes from the same record, and each is optional. As
  * discrete props that would be seven optional parameters at the call site, all
  * threaded from one object the caller already has.
  *
- * Every field below is optional on `Project`, so this renders correctly for a
- * project that is still an identity-only stub.
+ * The metadata sits beneath a rule as a specification block rather than inline,
+ * so a reader can scan role/year/status without entering the prose.
  *
- * Structural only.
+ * Every field is optional on `Project`, so this renders correctly for a project
+ * that is still an identity-only stub.
  */
 
 export interface CaseStudyHeroProps {
@@ -27,58 +30,66 @@ export interface CaseStudyHeroProps {
   id?: string
 }
 
+const STATUS_LABEL: Record<NonNullable<Project['status']>, string> = {
+  shipped: 'Shipped',
+  'in-progress': 'In progress',
+  archived: 'Archived',
+}
+
+/** One cell of the specification block. */
+function SpecItem({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="gap-0-5 flex flex-col">
+      <dt>
+        <Text as="span" variant="overline" color="muted">
+          {label}
+        </Text>
+      </dt>
+      <dd>
+        <Text as="span" variant="sm" color="primary" weight="medium">
+          {children}
+        </Text>
+      </dd>
+    </div>
+  )
+}
+
 export function CaseStudyHero({ project, className, id }: CaseStudyHeroProps) {
-  const { title, description, summary, role, year, stack } = project
+  const { title, description, summary, role, year, status, stack } = project
   const standfirst = description ?? summary
+  const hasSpec = Boolean(role || year || status)
 
   return (
-    <header className={cn('flex flex-col gap-3', className)}>
-      <Heading as="h1" variant="display-lg" id={id}>
+    <header className={cn('flex flex-col', className)}>
+      <Heading as="h1" variant="display-lg" id={id} className="max-w-[var(--measure-md)]">
         {title}
       </Heading>
 
       {standfirst ? (
-        <Text variant="lead" measure="md">
+        <Text variant="lead" measure="sm" className="mt-3">
           {standfirst}
         </Text>
       ) : null}
 
-      {role || year ? (
-        <dl className="flex flex-wrap gap-4">
-          {role ? (
-            <div className="gap-0-5 flex flex-col">
-              <dt>
-                <Text as="span" variant="overline" color="tertiary">
-                  Role
-                </Text>
-              </dt>
-              <dd>
-                <Text as="span" variant="sm" color="primary">
-                  {role}
-                </Text>
-              </dd>
-            </div>
-          ) : null}
-
+      {hasSpec ? (
+        <dl
+          className={cn(
+            'border-border mt-8 grid grid-cols-2 gap-4 border-t pt-4',
+            'sm:flex sm:flex-wrap sm:gap-8',
+          )}
+        >
+          {role ? <SpecItem label="Role">{role}</SpecItem> : null}
           {year ? (
-            <div className="gap-0-5 flex flex-col">
-              <dt>
-                <Text as="span" variant="overline" color="tertiary">
-                  Year
-                </Text>
-              </dt>
-              <dd>
-                <Text as="span" variant="sm" color="primary">
-                  {year}
-                </Text>
-              </dd>
-            </div>
+            <SpecItem label="Year">
+              <span className="tnum">{year}</span>
+            </SpecItem>
           ) : null}
+          {status ? <SpecItem label="Status">{STATUS_LABEL[status]}</SpecItem> : null}
         </dl>
       ) : null}
 
       {stack && stack.length > 0 ? (
-        <ul className="flex flex-wrap gap-1">
+        <ul className={cn('flex flex-wrap gap-1', hasSpec ? 'mt-4' : 'mt-8')}>
           {stack.map((item) => (
             <li key={item}>
               <Badge variant="outline" size="sm">

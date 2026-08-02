@@ -12,7 +12,9 @@ import { cn } from '@/lib/cn'
  * `id` exists so the parent `Section` can reference it via `labelledBy`, making
  * the section a navigable landmark.
  *
- * Structural only.
+ * No motion of its own. Section headers appear below the fold, so the call site
+ * wraps this in a `Reveal` — putting a scroll trigger inside the component would
+ * force every consumer into a client boundary it may not want.
  */
 
 export interface SectionHeaderProps {
@@ -36,17 +38,19 @@ export function SectionHeader({
   as = 'h2',
 }: SectionHeaderProps) {
   return (
-    <header className={cn('flex flex-col gap-1', className)}>
-      {eyebrow ? (
-        <Text variant="overline" color="tertiary">
-          {eyebrow}
-        </Text>
-      ) : null}
-
+    <header className={cn('flex flex-col gap-2', className)}>
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <Heading as={as} variant="h2" id={id}>
-          {title}
-        </Heading>
+        <div className="gap-0-5 flex flex-col">
+          {eyebrow ? (
+            <Text variant="overline" color="tertiary">
+              {eyebrow}
+            </Text>
+          ) : null}
+
+          <Heading as={as} variant="h2" id={id}>
+            {title}
+          </Heading>
+        </div>
 
         {action}
       </div>

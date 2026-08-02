@@ -13,7 +13,9 @@ import { cn } from '@/lib/cn'
  * to open), and the stretched overlay covers everything beneath it. Actions go
  * in a slot and remain individually focusable.
  *
- * Structural only.
+ * `focus-within` rather than `hover` alone for the border: the actions inside
+ * are the only focusable elements, so keyboard users need the container itself
+ * to acknowledge that focus has entered it.
  */
 
 export interface ContactCardProps {
@@ -26,7 +28,17 @@ export interface ContactCardProps {
 
 export function ContactCard({ title, description, action, className }: ContactCardProps) {
   return (
-    <Card as="article" variant="outline" className={cn('flex flex-col gap-1', className)}>
+    <Card
+      as="article"
+      variant="outline"
+      padding="lg"
+      className={cn(
+        'flex h-full flex-col gap-1',
+        'duration-base transition-colors ease-out',
+        'hover:border-border-interactive focus-within:border-border-interactive',
+        className,
+      )}
+    >
       <Heading as="h3" variant="h5">
         {title}
       </Heading>
@@ -37,7 +49,7 @@ export function ContactCard({ title, description, action, className }: ContactCa
         </Text>
       ) : null}
 
-      {action ? <div className="mt-auto flex flex-wrap gap-1 pt-1">{action}</div> : null}
+      {action ? <div className="mt-auto flex flex-wrap gap-2 pt-3">{action}</div> : null}
     </Card>
   )
 }
