@@ -1,0 +1,201 @@
+/**
+ * BASE LAYER
+ * ----------------------------------------------------------------------------
+ * Element-level defaults and global accessibility behaviour. Everything here is
+ * scoped to `@layer base` so any utility class wins without needing `!`.
+ */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--color-border);
+    min-width: 0; /* Flex/grid children default to min-content and refuse to
+                     shrink; this is the standard fix for overflow blowouts. */
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    /* Keeps anchor targets clear of the fixed header. Header height is a real
+       token so this stays correct if the header resizes. */
+    scroll-padding-top: var(--header-height);
+    /* Reserve the scrollbar gutter at all times so navigating between a short
+       page and a tall one does not shift layout horizontally. */
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    font-weight: var(--weight-regular);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Contextual alternates + kerning on; ligatures stay off in UI text where
+       they can harm glyph-level scanning. */
+    font-feature-settings: 'kern' 1, 'calt' 1;
+    /* Theme flips are animated so the toggle reads as a deliberate transition
+       rather than a flash. Property list is explicit — never `all`. */
+    transition:
+      background-color var(--duration-base) var(--ease-out),
+      color var(--duration-base) var(--ease-out);
+  }
+
+  /* Headings inherit from the typography components; these are safety defaults
+     for any raw heading (e.g. inside future MDX content). */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    text-wrap: balance; /* Prevents orphaned last words in headlines. */
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty; /* Same idea as `balance`, tuned for multi-line prose. */
+  }
+
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    /* Descenders stay legible when underlines are enabled on prose links. */
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+
+  button {
+    background: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+    background: none;
+  }
+
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family: var(--font-mono);
+    font-size: 0.9em; /* Relative: mono faces run optically large at matched px. */
+    font-feature-settings: 'kern' 0, 'calt' 0; /* Preserve monospace alignment. */
+  }
+
+  img,
+  svg,
+  video,
+  canvas,
+  picture {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  svg {
+    fill: none;
+    flex-shrink: 0; /* Icons must never squash inside flex rows. */
+  }
+
+  hr {
+    border-top-width: var(--border-width-thin);
+    border-color: var(--color-border);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-accent-foreground);
+  }
+
+  /* ==========================================================================
+     FOCUS
+     --------------------------------------------------------------------------
+     `:focus-visible` only — the browser's own heuristic decides when focus was
+     keyboard-driven. Suppressing focus rings on mouse click while preserving
+     them for keyboard users is the whole point; removing outlines outright is
+     a WCAG 2.4.7 failure.
+     ========================================================================== */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: var(--radius-sm);
+  }
+
+  /* ==========================================================================
+     REDUCED MOTION
+     --------------------------------------------------------------------------
+     Durations collapse to 0.01ms rather than 0 — a true zero cancels
+     `transitionend`/`animationend`, and any logic waiting on those events would
+     silently hang.
+
+     `scroll-behavior: auto` is critical: smooth scrolling is a documented
+     vestibular trigger, and it is not covered by resetting animations.
+
+     Framer Motion is handled separately in JS (`useReducedMotion`), since its
+     transforms are inline styles this rule cannot reach.
+     ========================================================================== */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* ==========================================================================
+     GLOBAL LAYOUT VARIABLES
+     --------------------------------------------------------------------------
+     Live on :root rather than in the token files because they are *layout
+     state*, not design decisions — the header and cursor both read them.
+     ========================================================================== */
+  :root {
+    --header-height: var(--space-8);
+  }
+
+  @media (min-width: 48rem) {
+    :root {
+      --header-height: var(--space-10);
+    }
+  }
+}

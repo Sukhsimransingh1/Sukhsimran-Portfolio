@@ -1,0 +1,322 @@
+/**
+ * PRIMITIVE TOKENS
+ * ----------------------------------------------------------------------------
+ * Raw, context-free values. These describe *what a value is*, never *what it is
+ * for*. Nothing in the application layer may consume these directly — components
+ * read semantic tokens only (see `semantic.css`).
+ *
+ * Two-layer indirection is what makes rebranding a one-file change: swap the
+ * primitives, and every semantic token that points at them moves in lockstep.
+ */
+
+:root {
+  /* ==========================================================================
+     SPACING — 8px system
+     --------------------------------------------------------------------------
+     `--space-1` deliberately equals 8px, not 4px. Making 8px the *unit* means
+     the scale is self-enforcing: there is no token that yields 5px or 13px, so
+     off-grid spacing requires visibly leaving the system.
+
+     `--space-0-5` (4px) is the single sanctioned half-step, reserved for
+     optical adjustments inside components (icon gaps, badge insets) where a
+     full 8px would look loose.
+     ========================================================================== */
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0-5: 0.25rem; /*   4px — half-step, intra-component only */
+  --space-1: 0.5rem; /*   8px */
+  --space-2: 1rem; /*  16px */
+  --space-3: 1.5rem; /*  24px */
+  --space-4: 2rem; /*  32px */
+  --space-5: 2.5rem; /*  40px */
+  --space-6: 3rem; /*  48px */
+  --space-7: 3.5rem; /*  56px */
+  --space-8: 4rem; /*  64px */
+  --space-10: 5rem; /*  80px */
+  --space-12: 6rem; /*  96px */
+  --space-14: 7rem; /* 112px */
+  --space-16: 8rem; /* 128px */
+  --space-20: 10rem; /* 160px */
+  --space-24: 12rem; /* 192px */
+  --space-32: 16rem; /* 256px */
+  --space-40: 20rem; /* 320px */
+
+  /* ==========================================================================
+     TYPOGRAPHY — families
+     --------------------------------------------------------------------------
+     Values are injected by `next/font` at build time (see `src/lib/fonts.ts`)
+     and land on <html> as class-scoped variables. The fallback stacks below are
+     metric-adjacent to the primary faces to minimise layout shift before swap.
+     ========================================================================== */
+  --font-sans:
+    var(--font-sans-primary), ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', sans-serif;
+  --font-display:
+    var(--font-display-primary), var(--font-sans-primary), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-mono:
+    var(--font-mono-primary), ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ==========================================================================
+     TYPOGRAPHY — fluid size scale
+     --------------------------------------------------------------------------
+     Ratio ~1.2 (minor third) at the body end, widening toward display sizes so
+     headlines gain editorial presence without bloating reading text.
+
+     Every step is a clamp() interpolating between a 360px viewport and a 1440px
+     viewport. Fluid type is used instead of breakpoint-stepped type because
+     stepped type produces visible "jumps" mid-resize and forces a matching
+     breakpoint for every heading — neither scales.
+
+     The `vw` coefficient is bounded by clamp() on both ends, so text remains
+     legible when zoomed to 200% (WCAG 1.4.4).
+     ========================================================================== */
+  --text-2xs: clamp(0.6875rem, 0.66rem + 0.12vw, 0.75rem); /* 11 → 12 */
+  --text-xs: clamp(0.75rem, 0.72rem + 0.14vw, 0.8125rem); /* 12 → 13 */
+  --text-sm: clamp(0.875rem, 0.85rem + 0.12vw, 0.9375rem); /* 14 → 15 */
+  --text-base: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem); /* 16 → 17 */
+  --text-md: clamp(1.0625rem, 1rem + 0.28vw, 1.1875rem); /* 17 → 19 */
+  --text-lg: clamp(1.1875rem, 1.09rem + 0.42vw, 1.375rem); /* 19 → 22 */
+  --text-xl: clamp(1.375rem, 1.22rem + 0.7vw, 1.75rem); /* 22 → 28 */
+  --text-2xl: clamp(1.625rem, 1.36rem + 1.19vw, 2.25rem); /* 26 → 36 */
+  --text-3xl: clamp(2rem, 1.6rem + 1.78vw, 2.9375rem); /* 32 → 47 */
+  --text-4xl: clamp(2.375rem, 1.78rem + 2.67vw, 3.8125rem); /* 38 → 61 */
+  --text-5xl: clamp(2.75rem, 1.87rem + 3.93vw, 4.9375rem); /* 44 → 79 */
+  --text-6xl: clamp(3.125rem, 1.85rem + 5.68vw, 6.4375rem); /* 50 → 103 */
+
+  /* ==========================================================================
+     TYPOGRAPHY — line height
+     --------------------------------------------------------------------------
+     Unitless so children inherit a ratio, not a computed px value.
+     Large type needs proportionally tighter leading; body text needs looser
+     leading for sustained reading (WCAG 1.4.12 asks for >= 1.5 on body copy).
+     ========================================================================== */
+  --leading-none: 1;
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+  --leading-loose: 1.8;
+
+  /* ==========================================================================
+     TYPOGRAPHY — tracking
+     --------------------------------------------------------------------------
+     Optical sizing compensation: large type appears loosely spaced at default
+     tracking, small caps type appears cramped. Negative values on display,
+     positive on the smallest labels.
+     ========================================================================== */
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.02em;
+  --tracking-snug: -0.01em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.06em;
+  --tracking-widest: 0.14em;
+
+  /* ==========================================================================
+     TYPOGRAPHY — weight
+     ========================================================================== */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ==========================================================================
+     TYPOGRAPHY — measure (line length)
+     --------------------------------------------------------------------------
+     Reading comfort peaks around 60–75 characters per line. `ch` units track
+     the actual font, so the constraint holds across families.
+     ========================================================================== */
+  --measure-xs: 34ch;
+  --measure-sm: 48ch;
+  --measure-md: 62ch;
+  --measure-lg: 72ch;
+  --measure-xl: 84ch;
+
+  /* ==========================================================================
+     RADIUS
+     --------------------------------------------------------------------------
+     A tight, architectural ramp. Nothing above 24px except `--radius-full`:
+     heavily rounded surfaces read as consumer-app, which is off-brand.
+     ========================================================================== */
+  --radius-none: 0;
+  --radius-xs: 0.125rem; /*  2px */
+  --radius-sm: 0.25rem; /*  4px */
+  --radius-md: 0.5rem; /*  8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
+  --radius-2xl: 1.5rem; /* 24px */
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     BORDER WIDTH
+     ========================================================================== */
+  --border-width-none: 0;
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 3px;
+
+  /* ==========================================================================
+     ELEVATION / SHADOW
+     --------------------------------------------------------------------------
+     Layered shadows (tight contact shadow + diffuse ambient shadow) rather than
+     a single blur, which is what separates a real elevation model from a CSS
+     drop-shadow. Alpha is driven by `--shadow-color` so dark mode can deepen
+     shadows independently — see `semantic.css`.
+     ========================================================================== */
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px 0 var(--shadow-color-subtle);
+  --shadow-sm:
+    0 1px 2px -1px var(--shadow-color-subtle), 0 2px 4px -2px var(--shadow-color-subtle);
+  --shadow-md:
+    0 2px 4px -2px var(--shadow-color-subtle), 0 6px 12px -3px var(--shadow-color);
+  --shadow-lg:
+    0 4px 8px -4px var(--shadow-color-subtle), 0 12px 24px -6px var(--shadow-color);
+  --shadow-xl:
+    0 8px 16px -8px var(--shadow-color-subtle), 0 24px 48px -12px var(--shadow-color);
+  --shadow-2xl: 0 32px 80px -16px var(--shadow-color-strong);
+
+  /* Inset shadows for pressed / recessed states. */
+  --shadow-inner: inset 0 1px 2px 0 var(--shadow-color-subtle);
+
+  /* ==========================================================================
+     MOTION — duration
+     --------------------------------------------------------------------------
+     Bounded to the 200–600ms window mandated by the motion guide. Sub-200ms
+     reads as an instant state flip (correct for hovers, wrong for reveals);
+     above 600ms the interface feels sluggish and blocks interaction.
+
+     `--duration-instant` (75ms) is the one exception, reserved for colour-only
+     feedback where any perceptible delay feels broken.
+     ========================================================================== */
+  --duration-instant: 75ms;
+  --duration-fast: 200ms;
+  --duration-base: 320ms;
+  --duration-slow: 460ms;
+  --duration-slower: 600ms;
+
+  /* ==========================================================================
+     MOTION — easing
+     --------------------------------------------------------------------------
+     `--ease-out` is the workhorse: fast departure, gentle settle. It is what
+     makes entrances feel like they were already in motion before you noticed.
+
+     `--ease-emphasized` has a longer tail for larger travel distances.
+     There is intentionally no spring/bounce curve — overshoot reads as playful,
+     which is off-brand.
+     ========================================================================== */
+  --ease-linear: cubic-bezier(0, 0, 1, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ==========================================================================
+     MOTION — travel distance
+     --------------------------------------------------------------------------
+     How far an element moves during a reveal. Small values look intentional;
+     large values look like the page is assembling itself.
+     ========================================================================== */
+  --motion-distance-sm: 8px;
+  --motion-distance-md: 16px;
+  --motion-distance-lg: 28px;
+
+  /* Blur applied by `blurReveal`, in px. */
+  --motion-blur: 8px;
+
+  /* ==========================================================================
+     TRANSITION — composed shorthands
+     --------------------------------------------------------------------------
+     Property lists are explicit. `transition: all` is banned: it animates
+     layout-affecting properties by accident and defeats compositor promotion.
+     ========================================================================== */
+  --transition-colors:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    fill var(--duration-fast) var(--ease-out),
+    stroke var(--duration-fast) var(--ease-out);
+  --transition-opacity: opacity var(--duration-fast) var(--ease-out);
+  --transition-transform: transform var(--duration-base) var(--ease-out);
+  --transition-shadow: box-shadow var(--duration-fast) var(--ease-out);
+
+  /* ==========================================================================
+     LAYOUT — container widths
+     --------------------------------------------------------------------------
+     `--container-prose` is measured in ch (see measure tokens) and is the only
+     width tuned for reading rather than composition.
+     ========================================================================== */
+  --container-xs: 30rem; /*  480px */
+  --container-sm: 40rem; /*  640px */
+  --container-md: 48rem; /*  768px */
+  --container-lg: 64rem; /* 1024px */
+  --container-xl: 80rem; /* 1280px */
+  --container-2xl: 90rem; /* 1440px */
+  --container-full: 100%;
+
+  /* Horizontal breathing room; scales with viewport, never below 24px. */
+  --container-gutter: clamp(1.5rem, 1rem + 2.5vw, 3rem);
+
+  /* ==========================================================================
+     LAYOUT — grid
+     --------------------------------------------------------------------------
+     12 columns: divisible by 2, 3, 4 and 6, so halves, thirds and quarters all
+     land on the grid without fractional columns.
+     ========================================================================== */
+  --grid-columns: 12;
+  --grid-gutter: var(--space-3);
+  --grid-gutter-lg: var(--space-4);
+
+  /* ==========================================================================
+     BREAKPOINTS — declared in `theme.css`, not here
+     --------------------------------------------------------------------------
+     Tailwind's `@theme` block emits `--breakpoint-*` onto :root as a side
+     effect of configuring the responsive variants, so declaring them here as
+     well would create two sources of truth that can silently diverge.
+
+     They must be literal values in `theme.css` (never `var()`), because media
+     query conditions are evaluated before custom properties resolve.
+     ========================================================================== */
+
+  /* ==========================================================================
+     Z-INDEX
+     --------------------------------------------------------------------------
+     A named ladder with gaps of 10, so a layer can be slipped between two
+     existing ones without renumbering. Any `z-index` literal in a component is
+     a bug — it means a layer exists that this ladder does not describe.
+     ========================================================================== */
+  --z-behind: -1;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 20;
+  --z-header: 30;
+  --z-dropdown: 40;
+  --z-overlay: 50;
+  --z-modal: 60;
+  --z-popover: 70;
+  --z-toast: 80;
+  --z-tooltip: 90;
+  --z-cursor: 100;
+  --z-max: 999;
+
+  /* ==========================================================================
+     OPACITY
+     ========================================================================== */
+  --opacity-0: 0;
+  --opacity-subtle: 0.04;
+  --opacity-faint: 0.08;
+  --opacity-soft: 0.16;
+  --opacity-muted: 0.4;
+  --opacity-strong: 0.72;
+  --opacity-full: 1;
+
+  /* ==========================================================================
+     FOCUS RING
+     --------------------------------------------------------------------------
+     Centralised so keyboard focus is visually identical everywhere. 2px at 2px
+     offset clears WCAG 2.4.13 (focus appearance) on all surface tokens.
+     ========================================================================== */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}

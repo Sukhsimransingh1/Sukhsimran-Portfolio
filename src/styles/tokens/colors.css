@@ -1,0 +1,100 @@
+/**
+ * COLOR PRIMITIVES
+ * ----------------------------------------------------------------------------
+ * ⚠️  PLACEHOLDER PALETTE — NOT FINAL.
+ *
+ * These are perceptually-even neutral ramps plus one restrained accent hue,
+ * present so the system is buildable and contrast-testable before brand colours
+ * are chosen. Brand selection happens in a later phase.
+ *
+ * When the real palette arrives, THIS FILE IS THE ONLY ONE THAT CHANGES.
+ * No component, and no semantic token, references a raw hex value — they point
+ * at the `--*-<step>` names below, so replacing the ramps re-skins the entire
+ * product without touching application code.
+ *
+ * Steps run 50 (lightest) → 950 (darkest), matching the convention every
+ * designer already knows.
+ *
+ * Colours are authored in `oklch()`: lightness is perceptually uniform, so a
+ * step-500 in one hue reads as the same visual weight as step-500 in another.
+ * Hex ramps cannot make that guarantee — they drift lighter in yellows and
+ * darker in blues at identical nominal steps.
+ */
+
+:root {
+  /* ==========================================================================
+     NEUTRAL — the structural ramp
+     --------------------------------------------------------------------------
+     Very slightly cool (hue 265) rather than pure grey. A dead-neutral grey
+     reads as cheap on large surfaces; a few degrees of chroma gives the page a
+     considered, architectural cast without being perceived as "blue".
+     ========================================================================== */
+  --neutral-0: oklch(100% 0 0);
+  --neutral-50: oklch(98.4% 0.002 265);
+  --neutral-100: oklch(96.5% 0.003 265);
+  --neutral-200: oklch(92.4% 0.004 265);
+  --neutral-300: oklch(86.5% 0.005 265);
+  --neutral-400: oklch(71.5% 0.007 265);
+  --neutral-500: oklch(58.2% 0.008 265);
+  --neutral-600: oklch(47.8% 0.008 265);
+  --neutral-700: oklch(38.6% 0.007 265);
+  --neutral-800: oklch(28.4% 0.006 265);
+  --neutral-900: oklch(20.6% 0.005 265);
+  --neutral-950: oklch(14.8% 0.005 265);
+  --neutral-1000: oklch(9.5% 0.004 265);
+
+  /* ==========================================================================
+     ACCENT — placeholder
+     --------------------------------------------------------------------------
+     A deep, desaturated blue. Chosen as a placeholder precisely because it is
+     unremarkable: it will not quietly become the brand by familiarity, and its
+     low chroma proves the layout works without colour doing the heavy lifting.
+     ========================================================================== */
+  --accent-50: oklch(97% 0.014 255);
+  --accent-100: oklch(93.4% 0.031 255);
+  --accent-200: oklch(87.2% 0.058 255);
+  --accent-300: oklch(78.4% 0.09 255);
+  --accent-400: oklch(68.2% 0.122 255);
+  --accent-500: oklch(58.6% 0.142 255);
+  --accent-600: oklch(50.2% 0.138 255);
+  --accent-700: oklch(42.4% 0.116 255);
+  --accent-800: oklch(35.2% 0.092 255);
+  --accent-900: oklch(29.4% 0.07 255);
+  --accent-950: oklch(21% 0.05 255);
+
+  /* ==========================================================================
+     STATUS HUES
+     --------------------------------------------------------------------------
+     Status colour is never the sole carrier of meaning (WCAG 1.4.1) — these
+     always pair with an icon or text label at the component level.
+     ========================================================================== */
+  --success-50: oklch(96.5% 0.021 155);
+  --success-200: oklch(87% 0.068 155);
+  --success-400: oklch(70.4% 0.128 155);
+  --success-500: oklch(61.5% 0.132 155);
+  --success-600: oklch(52.4% 0.114 155);
+  --success-900: oklch(29% 0.058 155);
+
+  --warning-50: oklch(97.4% 0.028 85);
+  --warning-200: oklch(89.4% 0.09 85);
+  --warning-400: oklch(78.2% 0.146 85);
+  --warning-500: oklch(70.5% 0.152 85);
+  --warning-600: oklch(60.2% 0.132 85);
+  --warning-900: oklch(33.5% 0.07 85);
+
+  --danger-50: oklch(96.8% 0.019 25);
+  --danger-200: oklch(88.2% 0.062 25);
+  --danger-400: oklch(69.5% 0.164 25);
+  --danger-500: oklch(60.4% 0.192 25);
+  --danger-600: oklch(51.8% 0.176 25);
+  --danger-900: oklch(28.5% 0.09 25);
+
+  /* ==========================================================================
+     PURE / ALPHA
+     --------------------------------------------------------------------------
+     Channel triplets, not colours. They exist so alpha can be applied inline
+     via `rgb(var(--rgb-black) / 0.08)` without hardcoding a literal anywhere.
+     ========================================================================== */
+  --rgb-black: 0 0 0;
+  --rgb-white: 255 255 255;
+}

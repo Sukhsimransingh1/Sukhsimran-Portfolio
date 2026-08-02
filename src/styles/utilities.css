@@ -1,0 +1,109 @@
+/**
+ * UTILITIES
+ * ----------------------------------------------------------------------------
+ * Custom utilities for patterns Tailwind has no primitive for. Deliberately
+ * short — every addition here is a small tax on the system's learnability, so a
+ * utility earns its place only if it encodes a real accessibility or layout
+ * concern that would otherwise be re-implemented ad hoc.
+ */
+
+@layer utilities {
+  /**
+   * Visually hidden, still announced by screen readers.
+   * The canonical clip-rect technique: `display: none` and `visibility: hidden`
+   * both remove the element from the accessibility tree, which is the opposite
+   * of the intent here.
+   */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /** Hidden until focused — the skip-link pattern. */
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /**
+   * Constrain to a comfortable reading measure.
+   * Applied to prose containers, not to individual paragraphs.
+   */
+  .measure {
+    max-width: var(--measure-md);
+  }
+  .measure-sm {
+    max-width: var(--measure-sm);
+  }
+  .measure-lg {
+    max-width: var(--measure-lg);
+  }
+  .measure-xl {
+    max-width: var(--measure-xl);
+  }
+
+  /**
+   * Promote to its own compositor layer ahead of an animation.
+   * Use sparingly and remove when the animation ends — a permanently promoted
+   * layer consumes GPU memory and can *degrade* performance at scale.
+   */
+  .gpu {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /**
+   * Optical alignment for text set in all-caps at small sizes, where default
+   * tracking reads as cramped.
+   */
+  .caps {
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-widest);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /**
+   * Tabular figures — required anywhere numbers change in place (counters,
+   * metrics, timelines) so digits do not jitter as values update.
+   */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  /**
+   * Hairline that respects the border token. Exists because Tailwind's
+   * `border-t` plus a colour utility is two classes for a very common pairing.
+   */
+  .rule {
+    border-top-width: var(--border-width-thin);
+    border-color: var(--color-border);
+  }
+
+  /** Full-bleed escape from a constrained container. */
+  .bleed {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /** Disables interaction without removing the element from the a11y tree. */
+  .inert-visual {
+    pointer-events: none;
+    user-select: none;
+  }
+}
