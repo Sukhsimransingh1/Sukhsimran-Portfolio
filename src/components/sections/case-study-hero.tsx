@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 
+import { ProjectActions } from '@/components/content/project-actions'
 import { Badge } from '@/components/ui/badge'
 import { Heading, Text } from '@/components/ui/typography'
 import type { Project } from '@/content/types'
@@ -18,6 +19,12 @@ import { cn } from '@/lib/cn'
  *
  * The metadata sits beneath a rule as a specification block rather than inline,
  * so a reader can scan role/year/status without entering the prose.
+ *
+ * REPOSITORY AND DEMO ACTIONS SIT HERE, NOT ONLY AT THE FOOT OF THE PAGE.
+ * `CaseStudyLayout` already renders a `Links` block, but that is the end of a
+ * long read. A visitor who arrives wanting the code should not have to scroll
+ * the whole narrative to find it. `ProjectActions` renders nothing when neither
+ * URL exists, so this costs no space on projects that have none.
  *
  * Every field is optional on `Project`, so this renders correctly for a project
  * that is still an identity-only stub.
@@ -99,6 +106,8 @@ export function CaseStudyHero({ project, className, id }: CaseStudyHeroProps) {
           ))}
         </ul>
       ) : null}
+
+      <ProjectActions project={project} size="base" className="mt-6" />
     </header>
   )
 }

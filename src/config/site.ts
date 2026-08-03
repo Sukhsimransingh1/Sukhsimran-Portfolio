@@ -8,13 +8,16 @@
  * duplicating them across metadata files is how OG tags and sitemaps drift out
  * of sync.
  *
- * ⚠️  PLACEHOLDER VALUES — real identity and copy land in a later phase.
+ * `title` is the `<h1>` of the home page as well as the metadata title, so it
+ * is the name rather than a tagline — a tagline as `h1` leaves the document
+ * outline without the one thing a reader is looking for.
  */
 
 export const siteConfig = {
-  name: 'Portfolio',
-  title: 'Portfolio',
-  description: 'Placeholder description. Replaced in the content phase.',
+  name: 'Sukhsimran Singh',
+  title: 'Sukhsimran Singh',
+  description:
+    'Computer Science undergraduate specialising in Machine Learning and Generative AI. I design ML pipelines, NLP systems and ship full-stack AI applications.',
 
   /**
    * Absolute origin, no trailing slash.
@@ -28,8 +31,8 @@ export const siteConfig = {
   lang: 'en',
 
   author: {
-    name: 'Placeholder',
-    email: '',
+    name: 'Sukhsimran Singh',
+    email: 'sukhsimransingh304@gmail.com',
     handle: '',
   },
 
@@ -38,14 +41,20 @@ export const siteConfig = {
     path: '/og/default.png',
     width: 1200,
     height: 630,
-    alt: 'Portfolio',
+    alt: 'Sukhsimran Singh — AI & Machine Learning Engineer',
   },
 
-  /** Empty until real profiles are supplied; consumers must handle absence. */
+  /**
+   * Profile URLs, derived from the handles recorded in `docs/old-portfolio.md`
+   * (`Sukhsimransingh1`, `sukhsimran-singh1`) rather than invented — both are
+   * the canonical profile path for their platform. Consumers must still handle
+   * absence: `personJsonLd` filters empties out of `sameAs`, because an empty
+   * string is an invalid URL and would invalidate the whole node.
+   */
   links: {
-    github: '',
-    linkedin: '',
-    email: '',
+    github: 'https://github.com/Sukhsimransingh1',
+    linkedin: 'https://www.linkedin.com/in/sukhsimran-singh1',
+    email: 'mailto:sukhsimransingh304@gmail.com',
   },
 
   /**

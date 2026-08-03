@@ -44,9 +44,10 @@ export default function HomePage() {
     <>
       <Hero
         id="hero-title"
-        eyebrow="AI Engineer"
-        title={siteConfig.title}
+        eyebrow="AI & Machine Learning Engineer"
+        title="Building intelligent systems with AI and machine learning."
         description={siteConfig.description}
+        meta="B.Tech Computer Science, IKGPTU · CGPA 9.01 / 10 · Jalandhar, India"
         primaryAction={{ label: 'View work', href: routes.work }}
         secondaryAction={{ label: 'Get in touch', href: routes.contact }}
       />

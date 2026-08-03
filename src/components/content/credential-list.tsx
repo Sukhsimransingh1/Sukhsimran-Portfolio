@@ -19,6 +19,13 @@ import { cn } from '@/lib/cn'
  *
  * The whole row is the link target when `href` is present; rows without one
  * render as plain markup with no dead affordance.
+ *
+ * WHY THE ACTION LABEL IS TEXT AND NOT ONLY AN ARROW
+ * A bare arrow says "this goes somewhere" but not where. `action` carries the
+ * caller's wording — "View certificate" for a credential — so the destination
+ * is stated rather than implied. It is rendered inside the same anchor rather
+ * than as a nested button: a link inside a link is invalid, and the row is
+ * already the hit target.
  */
 
 export interface CredentialItem {
@@ -26,6 +33,8 @@ export interface CredentialItem {
   /** Issuer, date, or any secondary line. */
   readonly meta?: string
   readonly href?: string
+  /** Visible label for the outbound action. Ignored without an `href`. */
+  readonly action?: string
 }
 
 export interface CredentialListProps {
@@ -33,13 +42,27 @@ export interface CredentialListProps {
   className?: string
 }
 
-/** Normalises a `Certification` into the shared row shape. */
+/**
+ * Normalises a `Certification` into the shared row shape.
+ *
+ * `credentialId` joins the secondary line rather than getting its own row: it
+ * is the thing a verifier types into an issuer's lookup form, so it belongs
+ * next to the issuer, and it is meaningless on its own.
+ */
 export function certificationToItem(certification: Certification): CredentialItem {
-  const meta = [certification.issuer, certification.issued].filter(Boolean).join(' · ')
+  const meta = [certification.issuer, certification.issued, certification.credentialId]
+    .filter(Boolean)
+    .join(' · ')
+
   return {
     title: certification.title,
     ...(meta ? { meta } : {}),
-    ...(certification.href ? { href: certification.href } : {}),
+    // A credential URL is the only thing that earns the action label — without
+    // one there is no certificate to view, and a label with no destination is
+    // the dead affordance this component exists to avoid.
+    ...(certification.href
+      ? { href: certification.href, action: 'View certificate' }
+      : {}),
   }
 }
 
@@ -67,14 +90,30 @@ function Row({ item }: { item: CredentialItem }) {
         ) : null}
       </span>
       {item.href ? (
-        <ArrowUpRight
-          aria-hidden="true"
-          className={cn(
-            'text-content-muted size-2 shrink-0',
-            'duration-fast ease-out transition-transform',
-            'group-hover:-translate-y-px group-hover:translate-x-px',
-          )}
-        />
+        <span className="flex shrink-0 items-center gap-1">
+          {item.action ? (
+            <Text
+              as="span"
+              variant="sm"
+              color="tertiary"
+              className={cn(
+                'hidden sm:inline',
+                'duration-fast ease-out transition-colors',
+                'group-hover:text-content-accent',
+              )}
+            >
+              {item.action}
+            </Text>
+          ) : null}
+          <ArrowUpRight
+            aria-hidden="true"
+            className={cn(
+              'text-content-muted size-2 shrink-0',
+              'duration-fast ease-out transition-transform',
+              'group-hover:-translate-y-px group-hover:translate-x-px',
+            )}
+          />
+        </span>
       ) : null}
     </>
   )

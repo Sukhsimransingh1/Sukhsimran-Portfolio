@@ -43,6 +43,7 @@ export {
   isProjectSlug,
   orderedProjects,
   otherProjects,
+  projectLink,
   projectSlugs,
   projects,
   type ProjectSlug,

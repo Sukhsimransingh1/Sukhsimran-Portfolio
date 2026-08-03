@@ -10,7 +10,26 @@ import type { TimelineEntry } from './types'
  * an editorial selection, not a complete résumé, and generating it would remove
  * the ability to choose what appears.
  *
- * Empty by design — real entries arrive in the content phase.
+ * Ordered most recent first, matching the reading order of the page. Only
+ * entries with a real recorded start date appear; undated credentials live in
+ * the certifications and achievements lists instead.
  */
 
-export const timeline: readonly TimelineEntry[] = []
+export const timeline = [
+  {
+    kind: 'experience',
+    title: 'Backend AI Engineer Intern',
+    subtitle: 'FlyRank AI',
+    start: '2026-07',
+    description:
+      'Python and FastAPI services for production AI — LLM workflows, agentic pipelines and RAG.',
+  },
+  {
+    kind: 'education',
+    title: 'B.Tech, Computer Science & Engineering',
+    subtitle: 'IK Gujral Punjab Technical University',
+    start: '2023-08',
+    end: '2027-06',
+    description: 'CGPA 9.01 / 10. Specialising in machine learning and generative AI.',
+  },
+] as const satisfies readonly TimelineEntry[]
