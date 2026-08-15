@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand */
+  --ivory: #f4f0e8;
+  --ivory-soft: #ebe5da;
+
+  --graphite: #171717;
+  --graphite-soft: #292725;
+
+  --coral: #e9785f;
+  --sage: #8faf9a;
+  --beige: #c9b8a5;
+
+  /* Typography */
+  --text-primary: #171717;
+  --text-secondary: #5f5a53;
+  --text-muted: #8a8278;
+
+  /* Surfaces */
+  --surface: rgba(255, 255, 255, 0.42);
+  --surface-strong: rgba(255, 255, 255, 0.68);
+
+  /* Borders */
+  --border: rgba(23, 23, 23, 0.1);
+  --border-strong: rgba(23, 23, 23, 0.18);
+
+  /* Semantic */
+  --accent: var(--coral);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(233, 120, 95, 0.08),
+      transparent 28%
+    ),
+    var(--ivory);
+
+  color: var(--text-primary);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--coral);
+  color: var(--ivory);
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
