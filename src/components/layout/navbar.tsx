@@ -7,7 +7,7 @@ import {
 } from "@/lib/constants";
 
 export function Navbar() {
-  const resumeUrl = "https://drivhttps://drive.google.com/file/d/1kfyXFu0iI7eD6achlUbN_nYdNN3a09y1/view?usp=sharinge.google.com/file/d/1VWCEgeNcgZe88AiVF_Knwio2XruCZbGa/view?usp=sharing";
+  const resumeUrl = "https://drive.google.com/file/d/1kfyXFu0iI7eD6achlUbN_nYdNN3a09y1/view?usp=sharing";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
