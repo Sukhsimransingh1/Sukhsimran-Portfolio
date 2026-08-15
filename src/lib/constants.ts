@@ -11,7 +11,7 @@ export const SITE_CONFIG = {
   links: {
     github: "https://github.com/Sukhsimransingh1",
     linkedin: "https://www.linkedin.com/in/sukhsimran-singh1/",
-    resume: "https://drive.google.com/file/d/1VWCEgeNcgZe88AiVF_Knwio2XruCZbGa/view?usp=sharing",
+    resume: "https://drive.google.com/file/d/1kfyXFu0iI7eD6achlUbN_nYdNN3a09y1/view?usp=sharing",
   },
 } as const;
 
