@@ -14,13 +14,12 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-[calc(100svh-2rem)] items-center overflow-hidden pt-24 lg:pt-28"
     >
-      {/* Decorative vertical line */}
-      <div className="pointer-events-none absolute bottom-0 left-[7%] top-0 hidden w-px bg-[var(--border)] lg:block" />
-
       <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_0.92fr] lg:gap-8">
+          
           {/* Content */}
           <div className="relative z-20 max-w-3xl">
+            
             {/* Role / availability */}
             <Badge variant="accent">
               <span className="relative flex h-1.5 w-1.5">
@@ -63,6 +62,7 @@ export function Hero() {
 
             {/* CTA buttons */}
             <div className="mt-9 flex flex-wrap items-center gap-3">
+              
               {/* Explore Work */}
               <a href="#projects">
                 <PortfolioButton>
@@ -84,7 +84,10 @@ export function Hero() {
                 <PortfolioButton variant="secondary">
                   GitHub
 
-                  <ArrowUpRight size={16} className="ml-2" />
+                  <ArrowUpRight
+                    size={16}
+                    className="ml-2"
+                  />
                 </PortfolioButton>
               </Link>
             </div>
