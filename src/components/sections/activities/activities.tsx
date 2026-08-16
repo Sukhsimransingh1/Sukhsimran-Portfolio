@@ -45,7 +45,7 @@ export function Activities() {
           <div>
             <div className="mb-6 flex items-center gap-4">
               <span className="font-mono text-xs tracking-[0.3em] text-[#ef775f]">
-                08
+                07
               </span>
 
               <span className="h-px w-12 bg-[#ef775f]/50" />

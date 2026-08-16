@@ -126,13 +126,13 @@ const moreProjects: MoreProject[] = [
     technologies: ["NLP", "TF-IDF", "Naive Bayes", "Scikit-learn"],
   },
   {
-    number: "08",
-    category: "DEEP LEARNING · NLP",
-    title: "Next Word Prediction",
-    description:
-      "An LSTM-based language modelling project for predicting the next likely word from a given text sequence.",
-    technologies: ["LSTM", "TensorFlow", "Keras", "NLP"],
-  }
+  number: "08",
+  category: "DEEP LEARNING · NLP · SENTIMENT ANALYSIS",
+  title: "IMDB Review Sentiment Analysis",
+  description:
+    "A sentiment analysis system that classifies IMDB movie reviews as positive or negative using a Simple Recurrent Neural Network.",
+  technologies: ["RNN", "TensorFlow", "Keras", "NLP"],
+}
 
 ];
 

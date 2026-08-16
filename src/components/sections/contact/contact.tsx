@@ -39,7 +39,7 @@ export function Contact() {
         {/* Section heading */}
         <div className="mb-16 flex items-center gap-4">
           <span className="font-mono text-xs tracking-[0.3em] text-[#ef775f]">
-            09
+            08
           </span>
 
           <span className="h-px w-12 bg-[#ef775f]/50" />
