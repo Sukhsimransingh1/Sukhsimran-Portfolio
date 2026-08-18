@@ -8,8 +8,14 @@ import {
   certifications,
 } from "@/data/portfolio";
 
+const apiKey = process.env.GROQ_API_KEY;
+
+if (!apiKey) {
+  console.error("GROQ_API_KEY is missing.");
+}
+
 const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
+  apiKey,
 });
 
 const portfolioContext = `
@@ -55,7 +61,6 @@ ${portfolioProfile.github}
 LinkedIn:
 ${portfolioProfile.linkedin}
 
-
 ========================
 EDUCATION
 ========================
@@ -72,13 +77,11 @@ ${portfolioProfile.education.duration}
 CGPA:
 ${portfolioProfile.education.cgpa}
 
-
 ========================
 AREAS OF FOCUS
 ========================
 
 ${portfolioProfile.focus.map((item) => `- ${item}`).join("\n")}
-
 
 ========================
 EXPERIENCE
@@ -90,12 +93,12 @@ ${experience
 Company: ${item.company}
 Role: ${item.role}
 Type: ${item.type}
+
 Description:
 ${item.description}
 `,
   )
   .join("\n")}
-
 
 ========================
 PROJECTS
@@ -118,7 +121,6 @@ ${project.highlights.map((item) => `- ${item}`).join("\n")}
   )
   .join("\n")}
 
-
 ========================
 CERTIFICATIONS
 ========================
@@ -131,14 +133,11 @@ ${certifications
   )
   .join("")}
 
-
 ========================
 RESPONSE STYLE
 ========================
 
 Answer naturally, like a professional portfolio assistant.
-
-Examples:
 
 If asked "Who is Sukhsimran?":
 Give a short introduction covering his role, education, and main areas of
@@ -159,6 +158,17 @@ Say that the portfolio currently does not provide that information.
 
 export async function POST(request: NextRequest) {
   try {
+    if (!process.env.GROQ_API_KEY) {
+      return NextResponse.json(
+        {
+          error: "GROQ_API_KEY is not configured.",
+        },
+        {
+          status: 500,
+        },
+      );
+    }
+
     const body = await request.json();
 
     const messages = Array.isArray(body.messages)
@@ -166,16 +176,13 @@ export async function POST(request: NextRequest) {
       : [];
 
     const completion = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
-
-      messages: [
+    model: "openai/gpt-oss-20b",      messages: [
         {
           role: "system",
           content: portfolioContext,
         },
         ...messages,
       ],
-
       temperature: 0.3,
       max_tokens: 500,
     });
@@ -187,12 +194,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       reply,
     });
-  } catch (error) {
-    console.error("Chat API error:", error);
+  } catch (error: any) {
+    console.error("========== GROQ CHAT ERROR ==========");
+    console.error(error);
+    console.error("Message:", error?.message);
+    console.error("Status:", error?.status);
+    console.error("======================================");
 
     return NextResponse.json(
       {
-        error: "Unable to process your message.",
+        error:
+          error?.message ||
+          "Unable to process your message.",
       },
       {
         status: 500,
