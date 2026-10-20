@@ -22,7 +22,30 @@ type MoreProject = {
 
 const featuredProjects: FeaturedProject[] = [
   {
-    number: "01",
+  number: "01",
+  category: "AGENTIC AI · FINANCIAL RESEARCH · HYBRID RAG",
+  title: "Finthesara",
+  description:
+    "An agentic financial research platform that orchestrates specialized AI agents for financial analysis, hybrid document retrieval, evidence verification, and research report synthesis.",
+  technologies: [
+    "Next.js",
+    "FastAPI",
+    "LangGraph",
+    "Hybrid RAG",
+    "Supabase",
+    "PostgreSQL",
+    "pgvector",
+    "SentenceTransformers",
+    "Groq",
+    "LangSmith",
+  ],
+  image: "/images/projects/Finthesara.jpeg",
+  liveUrl:
+    "https://drive.google.com/file/d/1bpWqxis1pgkvDU2R_e3cinGL4Hb3o8Fx/view?usp=sharing",
+  githubUrl: "https://github.com/Sukhsimransingh1/Finthesara",
+},
+  {
+    number: "02",
     category: "CLINICAL AI · RAG · MACHINE LEARNING",
     title: "PranRakshak AI",
     description:
@@ -43,7 +66,7 @@ const featuredProjects: FeaturedProject[] = [
     githubUrl: "https://github.com/Sukhsimransingh1/PRANRAKSHAK_AI",
   },
   {
-    number: "02",
+    number: "03",
     category: "DISASTER INTELLIGENCE · RAG · VISION AI",
     title: "DisasterSense AI",
     description:
@@ -62,7 +85,7 @@ const featuredProjects: FeaturedProject[] = [
     githubUrl: "https://github.com/Sukhsimransingh1/DisasterSense-AI",
   },
   {
-    number: "03",
+    number: "04",
     category: "GENERATIVE AI · RAG · DOCUMENT INTELLIGENCE",
     title: "OmniRAG AI",
     description:
@@ -81,7 +104,7 @@ const featuredProjects: FeaturedProject[] = [
     githubUrl: "https://github.com/Sukhsimransingh1/OmniRAG-AI",
   },
   {
-    number: "04",
+    number: "05",
     category: "NLP · EMBEDDINGS · AI EVALUATION",
     title: "Resume Screening AI",
     description:
@@ -102,7 +125,7 @@ const featuredProjects: FeaturedProject[] = [
 const moreProjects: MoreProject[] = [
   
   {
-    number: "05",
+    number: "06",
     category: "DEEP LEARNING · MACHINE LEARNING",
     title: "Customer Churn Prediction",
     description:
@@ -110,7 +133,7 @@ const moreProjects: MoreProject[] = [
     technologies: ["ANN", "TensorFlow", "Keras", "Scikit-learn"],
   },
   {
-    number: "06",
+    number: "07",
     category: "MACHINE LEARNING · MLOPS",
     title: "Student Performance Prediction",
     description:
@@ -118,7 +141,7 @@ const moreProjects: MoreProject[] = [
     technologies: ["Python", "Scikit-learn", "Flask", "MLOps"],
   },
   {
-    number: "07",
+    number: "08",
     category: "NLP · TEXT CLASSIFICATION",
     title: "Fake News Detection",
     description:
@@ -126,7 +149,7 @@ const moreProjects: MoreProject[] = [
     technologies: ["NLP", "TF-IDF", "Naive Bayes", "Scikit-learn"],
   },
   {
-  number: "08",
+  number: "09",
   category: "DEEP LEARNING · NLP · SENTIMENT ANALYSIS",
   title: "IMDB Review Sentiment Analysis",
   description:
